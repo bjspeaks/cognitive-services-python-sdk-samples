@@ -34,7 +34,7 @@ hemlock_tag = trainer.create_tag(project.id, "Hemlock")
 cherry_tag = trainer.create_tag(project.id, "Japanese Cherry")
 
 
-base_image_url = "https://github.com/bjspeaks/cognitive-services-python-sdk-samples/tree/master/samples/vision/"
+base_image_url = "C:\\Users\\blessonj\\Python\\cognitive-services-python-sdk-samples\\samples\\vision\\"
 
 print("Adding images...")
 
@@ -42,12 +42,12 @@ image_list = []
 
 for image_num in range(1, 11):
     file_name = "hemlock_{}.jpg".format(image_num)
-    with open(base_image_url + "images/Hemlock/" + file_name, "rb") as image_contents:
+    with open(base_image_url + "images\\Hemlock\\" + file_name, "rb") as image_contents:
         image_list.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[hemlock_tag.id]))
 
 for image_num in range(1, 11):
     file_name = "japanese_cherry_{}.jpg".format(image_num)
-    with open(base_image_url + "images/Japanese Cherry/" + file_name, "rb") as image_contents:
+    with open(base_image_url + "images\\Japanese Cherry\\" + file_name, "rb") as image_contents:
         image_list.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[cherry_tag.id]))
 
 upload_result = trainer.create_images_from_files(project.id, images=image_list)
@@ -79,7 +79,7 @@ from msrest.authentication import ApiKeyCredentials
 prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
 predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
-with open(base_image_url + "images/Test/test_image.jpg", "rb") as image_contents:
+with open(base_image_url + "images\\Test\\test_image.jpg", "rb") as image_contents:
     results = predictor.classify_image(
         project.id, publish_iteration_name, image_contents.read())
 
