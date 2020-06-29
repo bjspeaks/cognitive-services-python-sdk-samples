@@ -5,6 +5,10 @@ Created on Wed Jun 24 21:58:48 2020
 @author: blessonj
 
 Code to train the Custom Vision Cognitive Service
+
+Using the pip install azure-cognitiveservices-vision-customvision==2.0.0
+
+The current version is 3.0.0
 """
 
 from azure.cognitiveservices.vision.customvision.training import CustomVisionTrainingClient
@@ -39,18 +43,21 @@ base_image_url = "C:\\Users\\blessonj\\Python\\cognitive-services-python-sdk-sam
 print("Adding images...")
 
 image_list = []
+batching_list = []
 
 for image_num in range(1, 11):
     file_name = "hemlock_{}.jpg".format(image_num)
     with open(base_image_url + "images\\Hemlock\\" + file_name, "rb") as image_contents:
         image_list.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[hemlock_tag.id]))
+        
 
 for image_num in range(1, 11):
     file_name = "japanese_cherry_{}.jpg".format(image_num)
     with open(base_image_url + "images\\Japanese Cherry\\" + file_name, "rb") as image_contents:
         image_list.append(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[cherry_tag.id]))
+        '''batching_list.append=ImageFileCreateBatch(ImageFileCreateEntry(name=file_name, contents=image_contents.read(), tag_ids=[hemlock_tag.id]), tag_ids=[hemlock_tag.id])'''
 
-upload_result = trainer.create_images_from_files(project.id, images=image_list)
+upload_result = trainer.create_images_from_files(project.id,images=image_list)
 if not upload_result.is_batch_successful:
     print("Image batch upload failed.")
     for image in upload_result.images:
