@@ -48,7 +48,7 @@ for project in projects:
 
 with open(base_image_url + "images\\Test\\test_image.jpg", "rb") as image_contents:
     results = predictor.classify_image(
-        projects[0].id, publish_iteration_name, image_contents.read())
+        project_id, publish_iteration_name, image_contents.read())
 
     # Display the results.
     for prediction in results.predictions:
